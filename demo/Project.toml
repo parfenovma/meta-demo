@@ -1,7 +1,14 @@
 [deps]
+Base64 = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
+CodecZlib = "944b1d66-785c-5afd-91f1-9de20f533193"
+Gmsh = "705231aa-382f-11e9-3f0c-b7cb4346fdeb"
+Gridap = "56d4f2e9-7ea1-5844-9cf6-b9c51ca7ce8e"
+GridapGmsh = "3025c34a-b394-11e9-2a55-3fee550c04c8"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 MetaNDT = "f96cb834-4055-4d36-b75b-6528f613f0db"
+SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 Pluto = "c3e4b0f8-55cb-11ea-2926-15256bba5781"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 

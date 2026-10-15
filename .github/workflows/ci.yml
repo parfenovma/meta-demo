@@ -14,14 +14,141 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        julia-version: ['lts', '1']
+        julia-version: ['1.10', '1']
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v6
+        with:
+          path: meta-demo
+      - uses: actions/checkout@v6
+        with:
+          repository: parfenovma/meta-ndt
+          # The kernel revision used by this demo and its frozen fields.
+          ref: aa9993d6e083ff820f6eefb7792c4258bf428434
+          path: meta-ndt
       - uses: julia-actions/setup-julia@v3
         with:
           version: ${{ matrix.julia-version }}
       - name: Instantiate demo
+        working-directory: meta-demo
         run: julia --project=demo -e 'using Pkg; Pkg.instantiate()'
       - name: Run tests
+        working-directory: meta-demo
         run: julia --project=demo test/runtests.jl
+      - name: Verify paired-repository installation
+        working-directory: meta-demo
+        run: julia --project=demo test/installation.jl
+      - name: Verify coated cylinder FEM and analytic reference
+        working-directory: meta-demo
+        run: julia --project=demo ../meta-ndt/test/coated_fem.jl
+      - name: Verify coated cylinder client
+        working-directory: meta-demo
+        run: julia --project=demo test/coated_ui.jl
+      - name: Verify coupled coated-tube transient
+        working-directory: meta-demo
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+        run: julia --project=demo ../meta-ndt/test/coated_pulse.jl
+      - name: Verify coated-tube transient against harmonic and refinement checks
+        working-directory: meta-demo
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+        run: julia --project=demo ../meta-ndt/test/coated_pulse_validation.jl
+      - name: Verify water impulse in the shared workbench
+        working-directory: meta-demo
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+        run: julia --project=demo test/water_transient.jl
+      - name: Verify real Pluto parameter snapshots
+        working-directory: meta-demo
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+        run: julia --project=demo test/coated_pluto.jl
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Verify shared workbench assets
+        working-directory: meta-demo
+        run: node test/workbench_assets.cjs
+      - name: Verify canonical models and frozen data viewer
+        working-directory: meta-demo
+        run: julia --project=demo ../meta-ndt/test/canonical_experiments.jl
+      - name: Verify six prepared canonical cards
+        working-directory: meta-demo
+        run: julia --project=demo test/canonical_ui.jl
+      - name: Verify local canonical sensors and data transport
+        working-directory: meta-demo
+        run: node test/canonical_ui.cjs
+      - name: Verify complete canonical viewer lifecycle
+        working-directory: meta-demo
+        run: node test/canonical_viewer.cjs
+      - name: Verify frequency coverage and paired plot layout regressions
+        working-directory: meta-demo
+        run: node test/canonical_plot_data.cjs
+      - name: Verify STG focusing in the shipped time-domain fields
+        working-directory: meta-demo
+        run: node test/stg_focus_observation.cjs
+      - name: Verify displayed spectra against the physical models
+        working-directory: meta-demo
+        run: julia --project=demo test/canonical_frequency.jl
+      - name: Verify canonical notebook in real Pluto
+        working-directory: meta-demo
+        run: julia --project=demo test/canonical_pluto.jl
+      - name: Verify workbench adapters and snapshot shelf
+        working-directory: meta-demo
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+        run: julia --project=demo test/workbench_ui.jl
+      - name: Verify point interpolation and harmonic trace
+        working-directory: meta-demo
+        run: julia --project=demo ../meta-ndt/test/point_observations.jl
+      - name: Verify real STG transient and dense point sensor
+        working-directory: meta-demo
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+        run: julia --project=demo test/stg_transient.jl
+      - name: Verify pulse travel and time-step refinement
+        working-directory: meta-demo
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+        run: julia --project=demo test/transient_physics.jl
+      - name: Verify workbench in real Pluto
+        working-directory: meta-demo
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+        run: julia --project=demo test/workbench_pluto.jl
+      - name: Verify acoustic-solid FEM
+        working-directory: meta-demo
+        run: julia --project=demo ../meta-ndt/test/cylinder_fem.jl
+      - name: Verify array FEM and frequency sweep
+        working-directory: meta-demo
+        run: julia --project=demo ../meta-ndt/test/array_fem.jl
+      - name: Verify array client
+        working-directory: meta-demo
+        run: julia --project=demo test/array_ui.jl
+      - name: Verify STG gallery FEM
+        working-directory: meta-demo
+        run: julia --project=demo ../meta-ndt/test/gallery_fem.jl
+      - name: Verify gallery client
+        working-directory: meta-demo
+        run: julia --project=demo test/gallery_ui.jl
+      - name: Verify review regressions
+        working-directory: meta-demo
+        run: julia --project=demo test/review_regressions.jl
+      - name: Verify connected solid lens FEM
+        working-directory: meta-demo
+        run: julia --project=demo ../meta-ndt/test/solid_fem.jl
+      - name: Verify solid client
+        working-directory: meta-demo
+        run: julia --project=demo test/solid_ui.jl
+      - name: Verify solid API review regressions
+        working-directory: meta-demo
+        run: julia --project=demo ../meta-ndt/test/solid_api_regressions.jl
+
+  docs:
+    name: Practicum sources and published artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: python3 tools/build_practicum.py --check
+      - run: python3 test/practicum_docs.py

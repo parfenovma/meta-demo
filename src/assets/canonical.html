@@ -1,0 +1,62 @@
+<meta charset="UTF-8">
+<section id="canonical-lab" class="cn-lab">
+  <style>__CSS__</style>
+  <div class="cn-eyebrow">ВИРТУАЛЬНАЯ ЛАБОРАТОРИЯ</div>
+  <h1 class="cn-title"></h1>
+  <p class="cn-question"></p>
+  <div class="cn-instruction"></div>
+  <div class="cn-frequency" aria-label="Частота и постановка опыта"></div>
+  <div class="cn-toolbar">
+    <button class="cn-play" type="button">▶ Запустить импульс</button>
+    <button class="cn-reset" type="button">↶ В начало</button>
+    <input class="cn-time" type="range" min="0" value="0" aria-label="Физическое время">
+    <output class="cn-clock"></output>
+  </div>
+  <div class="cn-cases" aria-label="Варианты образца"></div>
+  <div class="cn-focus-controls" hidden aria-label="Как посмотреть фокусировку">
+    <button class="cn-view-wave active" type="button">Распространение импульса</button>
+    <button class="cn-view-path" type="button">Где прошла волна</button>
+    <button class="cn-focus-jump" type="button">Показать приход в фокус</button>
+  </div>
+  <label class="cn-echo-control" hidden><input class="cn-echo" type="checkbox"> Только эхо: вычесть падающую волну</label>
+  <div class="cn-fields">
+    <div><h3 class="cn-control-name"></h3><canvas class="cn-control" width="640" height="360" aria-label="Временное поле контрольного образца"></canvas></div>
+    <div><h3 class="cn-selected-name"></h3><canvas class="cn-selected" width="640" height="360" aria-label="Временное поле выбранного образца"></canvas></div>
+  </div>
+  <section class="cn-field-guide" aria-label="Как читать карты">
+    <div class="cn-scale">
+      <h3 class="cn-scale-title"></h3>
+      <div class="cn-scale-bar" role="img" aria-label="Общая цветовая шкала двух карт"></div>
+      <div class="cn-scale-ticks"></div>
+      <p class="cn-scale-note"></p>
+    </div>
+    <div class="cn-cavity-scale" hidden>
+      <h3 class="cn-cavity-scale-title"></h3>
+      <div class="cn-cavity-scale-bar" role="img" aria-label="Цветовая шкала давления в полостях"></div>
+      <div class="cn-cavity-scale-ticks"></div>
+      <p class="cn-cavity-scale-note"></p>
+    </div>
+    <p class="cn-caption"></p>
+    <p class="cn-field-reading"></p>
+    <div class="cn-geometry-key" aria-label="Обозначения на картах"></div>
+  </section>
+  <section class="cn-lesson" aria-label="Описание опыта">
+    <h2 class="cn-lesson-title"></h2>
+    <div class="cn-lesson-columns">
+      <div><h3>Что смотреть</h3><ol class="cn-watch"></ol></div>
+      <div><h3>Как это устроено</h3><p class="cn-mechanism"></p></div>
+    </div>
+    <p class="cn-case-note" aria-live="polite"></p>
+    <details class="cn-formula-details"><summary>Формула и обозначения</summary><div class="cn-equations"></div><p class="cn-symbols"></p></details>
+    <p class="cn-lesson-boundary"></p>
+  </section>
+  <div class="cn-stats" aria-live="polite"></div>
+  <div class="cn-bottom">
+    <div><h3 class="cn-trace-title">Сигнал датчика</h3><canvas class="cn-trace" width="640" height="260" aria-label="Запись датчика во времени"></canvas><div class="cn-trace-legend"></div><p class="cn-trace-explanation"></p><p class="cn-probe-help">Нажмите на карту, чтобы поставить датчик.</p><p class="cn-probe" aria-live="polite"></p></div>
+    <div><h3 class="cn-plot-title">Частотная характеристика</h3><canvas class="cn-spectrum" width="640" height="260" aria-label="Физический показатель выбранного опыта"></canvas><div class="cn-plot-legend"></div><p class="cn-reading" aria-live="polite"></p><p class="cn-explanation"></p></div>
+  </div>
+  <p class="cn-bound"></p>
+  <details><summary>Модель, статья и параметры расчёта</summary><p class="cn-model"></p><p><a class="cn-paper" target="_blank" rel="noopener"></a></p><pre class="cn-diagnostics"></pre><p>Поля рассчитаны заранее. При переключении образца новый расчёт не запускается. Датчик берёт значения из сохранённых данных; между узлами используется билинейная интерполяция. Шаги по пространству и времени указаны выше. Это результаты моделирования.</p></details>
+  <p class="cn-error" role="alert"></p>
+  <script>const canonicalData=__DATA__; __SCRIPT__</script>
+</section>

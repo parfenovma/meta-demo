@@ -1,0 +1,23 @@
+{
+  "title": "Метаматериалы: виртуальный физический практикум",
+  "subtitle": "Шесть опытов со звуком и упругими волнами",
+  "author": "MetaNDT / meta-demo",
+  "date": "Редакция от 15 октября 2026 года",
+  "lang": "ru-RU",
+  "chapters": [
+    "chapters/00-orientation.md",
+    "chapters/01-workbench.md",
+    "chapters/02-waves.md",
+    "chapters/03-mass.md",
+    "chapters/04-bulk.md",
+    "chapters/05-refraction.md",
+    "chapters/06-absorption.md",
+    "chapters/07-cloaking.md",
+    "chapters/08-stg.md",
+    "chapters/09-measurements.md",
+    "chapters/10-project.md",
+    "chapters/11-mentor.md",
+    "chapters/12-glossary.md",
+    "references.md"
+  ]
+}

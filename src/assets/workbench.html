@@ -1,0 +1,62 @@
+<section id="meta-workbench" aria-label="Виртуальный испытательный стенд">
+<style>__CSS__</style>
+<header class="wb-header"><div><span class="wb-brand">MetaNDT / LAB</span><h1>Волны. Материал. Эксперимент.</h1><p>Один стенд — два физических вопроса.</p></div><span class="wb-local">Julia · локальный расчёт</span></header>
+<nav class="wb-tabs" aria-label="Разделы стенда"><button data-tab="home" aria-current="page">Опыты</button><button data-tab="lab">Стенд</button><button data-tab="shelf">Сравнение <span data-count>0</span></button></nav>
+<div data-panel="home">
+  <p class="wb-intro">Выберите вопрос. Измените один параметр, предскажите результат — и проверьте его расчётом.</p>
+  <div class="wb-cards">
+    <button class="wb-card" data-choose="cloak"><span class="wb-eyebrow">01 / РАССЕЯНИЕ</span><svg data-schematic="cloak" viewBox="0 0 440 160" aria-label="Сечение металлической трубки с воздушной полостью и мягким покрытием"></svg><h2>Можно ли скрыть трубку от звука?</h2><p>Вода, сталь, воздух и силикон. Сравните объект с покрытием и без него — в том числе там, где покрытие мешает.</p><span class="wb-card-link">Открыть опыт →</span></button>
+    <button class="wb-card" data-choose="solid"><span class="wb-eyebrow">02 / ФОКУСИРОВКА</span><svg data-schematic="solid" viewBox="0 0 440 160" aria-label="Стена синусоидальных перемычек, соединённая с массивом твёрдого тела"></svg><h2>Собирает ли STG-стенка волну?</h2><p>Синусоидальные кирпичики в сплошном алюминии. Сравните фазовую расстановку, одинаковые элементы и прямой контроль.</p><span class="wb-card-link">Открыть опыт →</span></button>
+  </div>
+  <p class="wb-footnote">На карточках — схемы геометрии, не результаты моделирования. Расчёт начинается только по кнопке.</p>
+</div>
+<div data-panel="lab" hidden>
+  <div class="wb-layout">
+    <aside class="wb-settings">
+      <span class="wb-eyebrow">ПОСТАНОВКА ОПЫТА</span>
+      <label>Опыт<select data-setting="experiment"><option value="cloak">Трубка в воде</option><option value="solid">STG в алюминии</option></select></label>
+      <div data-controls="cloak"><label>Режим<select data-setting="cloak-regime"><option value="pulse">Импульс · распространение во времени</option><option value="harmonic">Гармоника · перебор частот</option></select></label><label>Частота<select data-setting="cloak-frequency"></select></label><label>Толщина силикона<select data-setting="thickness"><option value="0.0008">0.8 mm</option><option value="0.001" selected>1.0 mm</option><option value="0.0012">1.2 mm</option></select></label><p class="wb-hint">Начните с импульса 10 kHz. Для узких резонансов и перебора частот выберите «Гармоника». Подавление одной частоты не гарантирует подавление импульса.</p></div>
+      <div data-controls="solid" hidden><label>Режим<select data-setting="regime"><option value="pulse">Импульс · распространение во времени</option><option value="harmonic">Гармоника · установившееся поле</option></select></label><label>Конструкция<select data-setting="preset"></select></label><label>Частота<select data-setting="solid-frequency"><option value="100000">100 kHz</option><option value="140000" selected>140 kHz</option><option value="180000">180 kHz</option></select></label><label>Возбуждение<select data-setting="polarization"><option value="shear">SV — сдвиговое</option><option value="pressure">P — продольное</option></select></label><p class="wb-hint">Одна фиксированная геометрия рассчитана для SV 140 kHz. Импульс сравнивается с равно-массовым прямым контролем.</p></div>
+      <button class="wb-primary" data-action="run">Рассчитать опыт</button>
+      <div class="wb-status" role="status" aria-live="polite" data-status>Пока не рассчитано.</div>
+      <p class="wb-error" role="alert" data-error hidden></p>
+      <details><summary>Как исследовать</summary><ol><li>Измените один параметр.</li><li>Запишите своё ожидание.</li><li>Рассчитайте и закрепите результат.</li><li>Сравните запуски, объясните разницу.</li></ol><p>Полка хранится в памяти этой сессии. Экспортируйте результаты перед закрытием Pluto.</p></details>
+    </aside>
+    <div class="wb-result" role="region" aria-label="Результат опыта">
+      <div data-empty class="wb-empty"><span>СНАЧАЛА ГИПОТЕЗА</span><h2>Что изменится у волны?</h2><p>Выберите параметры слева. Здесь появится рассчитанное поле, рядом — контроль с той же цветовой шкалой.</p></div>
+      <div data-result hidden>
+        <div class="wb-applied"><span class="wb-eyebrow">ПОКАЗАН РАСЧЁТ <span data-run-id></span></span><h2 data-result-title></h2><p data-applied></p><p data-context></p></div>
+        <div class="wb-view-controls"><label>Показать<select data-view="case"></select></label><label>Поле<select data-view="mode"></select></label><label class="wb-check"><input type="checkbox" data-view="compare" checked>Рядом с контролем</label></div>
+        <div class="wb-phase"><button data-action="play" aria-pressed="false">▶ Анимация волны</button><input data-view="phase" aria-label="Фаза гармонического колебания" type="range" min="0" max="360" value="0"><output data-phase-value>0°</output><span data-playback-caption>Замедленное гармоническое колебание, не приход импульса</span></div>
+        <details data-source-panel hidden><summary data-source-title>Импульс источника · после шести периодов сила равна нулю</summary><canvas data-plot="source" aria-label="Форма конечного импульса источника"></canvas></details>
+        <div class="wb-fields"><figure><figcaption data-map-title="selected"></figcaption><canvas data-map="selected" aria-label="Поле выбранного случая"></canvas></figure><figure data-control-map><figcaption data-map-title="control"></figcaption><canvas data-map="control" aria-label="Поле контрольного случая"></canvas></figure></div>
+        <p class="wb-hint wb-probe-hint">Нажмите на любую карту, чтобы поставить или переместить датчик D1. Один и тот же датчик показан и на контроле.</p>
+        <div class="wb-color-key"><span data-color-label></span><span class="wb-gradient"></span><span data-color-range></span></div>
+        <section class="wb-probe" aria-label="Датчик D1">
+          <div class="wb-probe-heading"><h3>Датчик D1</h3><button data-action="probe-export" disabled>CSV сигнала</button></div>
+          <div class="wb-probe-controls"><label>x, mm<input data-probe-x type="number" step="0.1" value="0"></label><label>y, mm<input data-probe-y type="number" step="0.1" value="0"></label><button data-action="probe">Поставить по координатам</button><label>Измеряем<select data-view="quantity"></select></label></div>
+          <p data-probe-status role="status" aria-live="polite">Датчик ещё не установлен. Нажмите в поле или задайте координаты.</p>
+          <div data-probe-readings class="wb-probe-readings"></div>
+          <canvas data-plot="probe" aria-label="Сигналы точечного датчика и контроля" hidden></canvas><div data-probe-legend class="wb-legend"></div>
+          <p class="wb-hint" data-probe-caption></p>
+        </section>
+        <div class="wb-metric"><div><span data-metric-label></span><strong data-metric-value></strong></div><p data-metric-text></p></div>
+        <section class="wb-plot-section"><div class="wb-plot-heading"><h3 data-plot-title></h3><label data-zoom-label>Диапазон<select data-view="zoom"><option value="all">Весь перебор</option><option value="resonance">Первый резонанс ±30 Hz</option></select></label></div><canvas data-plot="main" aria-label="Сравнение физических характеристик"></canvas><p data-plot-caption class="wb-hint"></p></section>
+        <details class="wb-details"><summary>Физика, ограничения и численная проверка</summary><ul data-method></ul><pre data-diagnostics></pre><div data-downloads class="wb-downloads"></div></details>
+        <div class="wb-pin"><label>Ожидание → наблюдение → объяснение<textarea data-note maxlength="1200" rows="2" placeholder="Что изменили? Что заметили? Что осталось непонятным?"></textarea></label><button data-action="pin">Закрепить запуск</button><span data-pin-hint></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div data-panel="shelf" hidden>
+  <div class="wb-shelf-header"><div><h2>Сравнение запусков</h2><p>До шести результатов. Внутри одного опыта — общие оси и единицы, без отдельной нормировки пиков.</p></div><button data-action="export">Экспорт полки · JSON</button></div>
+  <div data-shelf-empty class="wb-empty"><h3>Здесь пока пусто</h3><p>Рассчитайте опыт и нажмите «Закрепить запуск».</p></div>
+  <div data-shelf-list class="wb-shelf-list"></div><div data-shelf-plots></div>
+  <p class="wb-footnote">Восстановление возвращает готовый результат без пересчёта. Полка не сохраняется автоматически после перезапуска Julia.</p>
+</div>
+<script>
+const catalog=__CATALOG__;
+__FIELD_GRID__
+__SCRIPT__
+</script>
+</section>
