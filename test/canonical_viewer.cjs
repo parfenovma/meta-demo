@@ -146,4 +146,3 @@ function duringLoading(v){
     console.log(`PASS: ${id} all sets/cases, matching observation/formula/case notes, full-time slider, field scale${id==='cloak'?', separate tube explanation and restored ground text, tube reference and circular geometry':''}${id==='focus'?', named and selected-color profile legend':''}`);
   }
 })().catch(e=>{console.error(e);process.exitCode=1});
-
