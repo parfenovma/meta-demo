@@ -12,6 +12,9 @@ SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 Pluto = "c3e4b0f8-55cb-11ea-2926-15256bba5781"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
+[sources]
+MetaNDT = {path = "../../meta-ndt"}
+
 [compat]
 Pluto = "0.20, 1"
 PlutoUI = "0.7"

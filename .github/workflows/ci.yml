@@ -32,6 +32,12 @@ jobs:
       - name: Instantiate demo
         working-directory: meta-demo
         run: julia --project=demo -e 'using Pkg; Pkg.instantiate()'
+      - name: Verify Pluto runtime dependencies
+        working-directory: meta-demo
+        run: julia --project=demo test/runtime.jl
+      - name: Verify frozen environments are unchanged
+        working-directory: meta-demo
+        run: git diff --exit-code -- demo
       - name: Run tests
         working-directory: meta-demo
         run: julia --project=demo test/runtests.jl

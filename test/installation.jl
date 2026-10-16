@@ -2,10 +2,12 @@ using Test, TOML
 
 @testset "Paired-repository installation" begin
     root = dirname(@__DIR__)
-    manifest = TOML.parsefile(joinpath(root, "demo", "Manifest.toml"))
-    dependency = only(manifest["deps"]["MetaNDT"])
-    @test normpath(joinpath(root, "demo", dependency["path"])) ==
-          normpath(joinpath(root, "..", "meta-ndt"))
+    @testset "$manifest_file" for manifest_file in ("Manifest.toml", "Manifest-v1.13.toml")
+        manifest = TOML.parsefile(joinpath(root, "demo", manifest_file))
+        dependency = only(manifest["deps"]["MetaNDT"])
+        @test normpath(joinpath(root, "demo", dependency["path"])) ==
+              normpath(joinpath(root, "..", "meta-ndt"))
+    end
     @test isfile(joinpath(root, "..", "meta-ndt", "Project.toml"))
     mktempdir() do temporary
         demo = joinpath(temporary, "meta-demo")
