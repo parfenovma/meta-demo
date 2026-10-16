@@ -2,8 +2,11 @@ using Test, JSON, MetaNDT
 include(joinpath(@__DIR__,"..","src","CanonicalUI.jl"))
 using .CanonicalUI
 
-@testset "Six prepared canonical experiments" begin
+@testset "Five prepared canonical experiments" begin
     @test Base.get(CanonicalPicker())=="mass"
+    @test CanonicalUI.CanonicalData.IDS==("mass","bulk","absorber","cloak","focus")
+    @test sort(filter(f->endswith(f,".json.gz"),readdir(CanonicalUI.CanonicalData.DATA)))==
+          sort([id*".json.gz" for id in CanonicalUI.CanonicalData.IDS])
     lessons=JSON.parsefile(joinpath(@__DIR__,"..","src","assets","canonical_lessons.json"))
     @test Set(keys(lessons))==Set([CanonicalUI.CanonicalData.IDS...,"tube"])
     for lesson in values(lessons)

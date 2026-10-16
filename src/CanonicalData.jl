@@ -4,7 +4,7 @@ using MetaNDT, JSON, Base64, CodecZlib, LinearAlgebra, SHA
 
 const ROOT=normpath(joinpath(@__DIR__,".."))
 const DATA=joinpath(ROOT,"data","canonical")
-const IDS=("mass","bulk","prism","absorber","cloak","focus")
+const IDS=("mass","bulk","absorber","cloak","focus")
 
 pack(a)=base64encode(transcode(ZlibCompressor,collect(reinterpret(UInt8,htol.(vec(Float32.(a)))))))
 
@@ -202,25 +202,6 @@ function prepare_tube_set()
         "model"=>"Прямой акустико-упругий Newmark: вода–сталь–силикон–воздух, смешанный P2/P1 радиальный FEM и угловые моды. Сохранены временные измерения.",
         "limit"=>"Резина меняет упругую связь и потери; это не универсальное устранение резонансов. Окно 1.2 ms конечно и не обязано включать весь звон. Scattering cancellation — иной механизм, чем ground cloak.",
         "source"=>"Rohde et al., Scientific Reports 2015","url"=>"https://doi.org/10.1038/srep13175")
-end
-
-function prepare_prism()
-    sets=Any[]
-    for (f,label) in ((2000.,"Отрицательные инерция и сжимаемость"),(3000.,"Вблизи нулевого индекса"),(4200.,"Положительная область"))
-        cases=[record_payload(canonical_spatial_record(:prism,v;frequency=f),name,Dict("type"=>"prism","variant"=>String(v)))
-            for (v,name) in ((:ordinary,"Обычная эффективная призма"),(:negative,"Дисперсионная метасреда"))]
-        push!(sets,Dict("label"=>label,"frequency"=>f,"cases"=>cases))
-    end
-    scan=collect(1500.:10.:4500.); fp=2000sqrt(2.5)
-    save_bundle("prism",Dict("title"=>"Преломление с другой стороны нормали",
-        "question"=>"Сравните прохождение пучка через обычную и дисперсионную призму одной формы.",
-        "instruction"=>"Начните с отрицательной области. Сравните направление вышедшего пакета; затем смените область частот.",
-        "model"=>"2D акустика с причинными Drude-переменными: инерция и сжимаемость зависят от частоты. Это заданная эффективная среда, НЕ расчёт лабиринтов Xie.",
-        "limit"=>"Демонстрация эффективного отрицательного преломления. Свойства микроструктуры не извлечены; изготовимость такой призмы из этой модели не следует.",
-        "unit"=>"Pa","coordinate_unit"=>"m","source"=>"Литературный ориентир: Xie et al., PRL 2013",
-        "url"=>"https://doi.org/10.1103/PhysRevLett.110.175501","sets"=>sets,
-        "plot"=>Dict("x"=>scan,"series"=>[Dict("name"=>"Re ρeff/ρ₀ = Re βeff/β₀","y"=>[real(1-fp^2/(f^2+im*12f)) for f in scan])],
-            "xlabel"=>"Частота, Hz","ylabel"=>"Относительные параметры","zero"=>true)))
 end
 
 end

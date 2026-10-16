@@ -16,7 +16,7 @@ const varying={...one,times:[0,1,3],samples:[1,2,2,2,3,2],geometry:{focus:.5}};
 assert.deepEqual([...cnAccumulation(varying)],[15.5,12],'actual nonuniform-time trapezoidal integral, not a decorative beam');
 assert.deepEqual([...cnAccumulation({...varying,samples:varying.samples.map(v=>2*v)})],[62,48],'accumulated response scales with amplitude squared');
 assert.equal(cnFocusFrame(varying),2,'jump to the peak of the calculated point signal');
-for(const id of ['mass','bulk','prism','absorber','cloak','focus']){
+for(const id of ['mass','bulk','absorber','cloak','focus']){
   const file=path.join(__dirname,'../data/canonical',id+'.json.gz');
   assert(fs.existsSync(file),'Missing prepared experiment: '+id);
   const d=JSON.parse(zlib.gunzipSync(fs.readFileSync(file)));

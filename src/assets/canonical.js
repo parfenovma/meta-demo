@@ -82,7 +82,6 @@ function cnShowFieldGuide(){
   const keys=[['⌖','Датчик: одна точка для обоих образцов']];
   const type=cnCases()[0].geometry.type;
   if(type==='solid')keys.push(['┆','Жёлтый пунктир — сечение профиля'],['○','Кольцо на оси — положение перетяжки'],['▧','Серое — пустоты; там нет смещения материала']);
-  if(type==='prism')keys.push(['┄','Жёлтый пунктир — нормаль к границе призмы']);
   if(type==='ground')keys.push(['△','Золотистый контур — граница плаща'],['▧','Серое — жёсткое основание']);
   if(type==='tube')keys.push(['○','Золотистое — резина; серое — сталь; тёмный центр — воздух']);
   cnGet('.cn-geometry-key').replaceChildren(...keys.map(([icon,text])=>{const el=document.createElement('span'),symbol=document.createElement('i');symbol.textContent=icon;el.append(symbol,document.createTextNode(text));return el}));
@@ -127,10 +126,6 @@ function cnGeometry(ctx,c,frame,X,Y,w,h){
     ctx.strokeStyle='#829ca8';ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(X(g.positions[j]),band.top-57);ctx.lineTo(ix-40,103);ctx.stroke();ctx.setLineDash([]);
     ctx.fillStyle='#dceaf0';ctx.font='12px system-ui';ctx.fillText('Одна полость, увеличено',ix-88,61);ctx.fillText('горловина',ix-110,157);ctx.fillText(g.open?'открыта':'закрыта',ix+15,169);ctx.fillText('канал с водой',52,band.top+band.height+18);ctx.fillText('падающая волна →',52,band.top-15);
     ctx.fillText('Давление в полостях · отдельная шкала под картами',42,29);
-  }else if(g.type==='prism'){
-    ctx.beginPath();[[-.14,-.2],[-.14,.2],[-.14+.4/Math.sqrt(3),.2]].forEach((p,i)=>i?ctx.lineTo(X(p[0]),Y(p[1])):ctx.moveTo(X(p[0]),Y(p[1])));ctx.closePath();ctx.stroke();
-    const midpoint=-.14+.2/Math.sqrt(3);ctx.setLineDash([5,5]);ctx.strokeStyle='#ffcf78';ctx.beginPath();ctx.moveTo(X(midpoint-.12*Math.sqrt(3)/2),Y(.06));ctx.lineTo(X(midpoint+.12*Math.sqrt(3)/2),Y(-.06));ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle='#e3eef2';ctx.font='12px system-ui';ctx.fillText('Заданная эффективная среда · не лабиринт',18,h-13);
   }else if(g.type==='ground'){
     if(g.variant!=='flat'){ctx.fillStyle='#637986';ctx.beginPath();ctx.moveTo(X(-.168),Y(0));ctx.lineTo(X(0),Y(.056));ctx.lineTo(X(.168),Y(0));ctx.closePath();ctx.fill()}
     if(g.variant==='cloak'){ctx.strokeStyle='#e6bf74';ctx.beginPath();ctx.moveTo(X(-.168),Y(0));ctx.lineTo(X(0),Y(.112));ctx.lineTo(X(.168),Y(0));ctx.stroke()}
@@ -191,15 +186,11 @@ function cnFrequencyPlot(){
   const p=cnData.plot,id=cnData.id,cases=cnCases(),frequency=cnData.sets[cnSet].frequency;
   const factor=Math.max(...(p.x||p.series[0].x))>=2000?.001:1;
   let series=p.series.map((s,i)=>({...s,x:(s.x||p.x).map(x=>x*factor),color:i===cnActive?cnColors[1]:cnColors[0]}));
-  let ylabel=p.ylabel,options={negative:['mass','bulk','prism'].includes(id),dots:true};
+  let ylabel=p.ylabel,options={negative:['mass','bulk'].includes(id),dots:true};
   if(id==='mass'){
     ylabel='Re σeff, кг/м²';series.forEach((s,i)=>s.markerValue=cases[i].diagnostics.surface_mass_real_kg_m2);
   }else if(id==='bulk'){
     ylabel='Re K / Kводы, без единиц';options.reference=1;series.forEach((s,i)=>s.markerValue=cases[i].diagnostics.bulk_modulus_real_Pa/2.1904e9);
-  }else if(id==='prism'){
-    ylabel='Re ρ/ρ₀ = Re β/β₀, без единиц';options.reference=1;
-    series=[{name:'Обычная призма',x:series[0].x,y:series[0].x.map(()=>1.5),markerValue:1.5,color:cnColors[0]},
-      {...series[0],name:'Метасреда: инерция и сжимаемость',markerValue:cases[1].diagnostics.relative_density_real,color:cnActive===1?cnColors[1]:cnColors[2]}];
   }else if(id==='absorber'){
     ylabel='Поглощённая мощность, %';options.rangeY=[0,105];
     series=series.map((s,i)=>({...s,y:s.y.map(v=>v*100),markerValue:cases[i+1].diagnostics.absorption*100,color:i+1===cnActive?cnColors[1]:cnColors[(i+2)%cnColors.length]}));
@@ -222,7 +213,6 @@ function cnReading(){
   let text='';
   if(id==='mass'){const value=d.surface_mass_real_kg_m2;text='На '+f+': '+cnFormat(value)+' kg/m². '+(value<0?'Ускорение и толчок колеблются в противофазе.':'Синфазная часть отклика положительна.')}
   if(id==='bulk'){const value=d.bulk_modulus_real_Pa/2.1904e9;text='На '+f+': модуль / модуль воды = '+cnFormat(value)+'. '+(value<0?'Давление и среднее сжатие колеблются в противофазе.':'Положительный отклик; у обычной воды это отношение равно 1.')}
-  if(id==='prism')text='На '+f+': инерция / инерция воздуха = сжимаемость / сжимаемость воздуха = '+cnFormat(d.relative_density_real)+'. Это заданные свойства выбранной призмы.';
   if(id==='absorber'){const depth=cnCases()[cnActive].geometry.depth,lambda=343/cnData.sets[cnSet].frequency;text='На '+f+' выбранный образец поглощает '+(d.absorption*100).toFixed(1)+'% мощности синусоидальной волны. Полость '+(depth*1000).toFixed(0)+' мм при длине волны '+(lambda*1000).toFixed(0)+' мм: около λ/'+(lambda/depth).toFixed(0)+'. Это размеры нашего образца, не реплика статьи.'}
   if(id==='focus'){const s=cnData.profile.series[cnActive],width=cnProfileWidth(s);text='Жёлтая скоба — ширина выбранного пика на половине его высоты: '+(width===null?'не определяется в пределах линии':width.toFixed(1)+' мм')+'. 100% — один общий максимум среди образцов; каждый профиль не растянут до 100% отдельно.'}
   cnGet('.cn-reading').textContent=text;cnGet('.cn-reading').hidden=!text;
@@ -281,7 +271,7 @@ async function cnChooseSet(i){
     cnGet('.cn-control-name').textContent='Контроль · '+cases[cnReference()].name;
     cnGet('.cn-cases').replaceChildren(...cases.map((c,j)=>{const b=document.createElement('button');b.type='button';b.textContent=c.name;b.onclick=()=>cnChooseCase(j);return b}));
     cnGet('.cn-time').max=cases[0].times.length-1;
-    cnPoint=cnData.id==='absorber'?[-.4,0]:cnData.id==='cloak'?(cnEcho?[.015,.008]:[.15,.26]):cnData.id==='prism'?[.4,0]:cnData.id==='focus'?[cases[0].geometry.focus,0]:[cases[0].x.at(-1)*.65,0];
+    cnPoint=cnData.id==='absorber'?[-.4,0]:cnData.id==='cloak'?(cnEcho?[.015,.008]:[.15,.26]):cnData.id==='focus'?[cases[0].geometry.focus,0]:[cases[0].x.at(-1)*.65,0];
     cnReady=true;cnChooseCase(Math.min(cnActive,cases.length-1));cnGet('.cn-play').disabled=false;cnGet('.cn-time').disabled=false;
   }catch(err){cnGet('.cn-error').textContent='Не удалось открыть готовые данные: '+err.message}
 }

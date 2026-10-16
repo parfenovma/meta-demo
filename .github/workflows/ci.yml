@@ -24,7 +24,7 @@ jobs:
         with:
           repository: parfenovma/meta-ndt
           # The kernel revision used by this demo and its frozen fields.
-          ref: aa9993d6e083ff820f6eefb7792c4258bf428434
+          ref: 6ae6c289d776c09e0fd5932c4e90083a9dffddd0
           path: meta-ndt
       - uses: julia-actions/setup-julia@v3
         with:
@@ -73,7 +73,7 @@ jobs:
       - name: Verify canonical models and frozen data viewer
         working-directory: meta-demo
         run: julia --project=demo ../meta-ndt/test/canonical_experiments.jl
-      - name: Verify six prepared canonical cards
+      - name: Verify five prepared canonical cards
         working-directory: meta-demo
         run: julia --project=demo test/canonical_ui.jl
       - name: Verify local canonical sensors and data transport

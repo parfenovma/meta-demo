@@ -1,6 +1,6 @@
 const fs=require('node:fs'),path=require('node:path'),zlib=require('node:zlib'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..');
-for(const id of ['mass','bulk','prism','absorber']){
+for(const id of ['mass','bulk','absorber']){
   const d=JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root,'data/canonical',id+'.json.gz'))));
   const p=d.plot;
   assert(p&&p.series.length,`${id}: missing frequency response`);

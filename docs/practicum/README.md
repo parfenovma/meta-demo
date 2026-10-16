@@ -11,15 +11,14 @@
 3. [Волны, резонанс и эффективные свойства](chapters/02-waves.md).
 4. [Работа 1. Динамическая масса](chapters/03-mass.md).
 5. [Работа 2. Объёмный модуль](chapters/04-bulk.md).
-6. [Работа 3. Преломление](chapters/05-refraction.md).
-7. [Работа 4. Поглощение](chapters/06-absorption.md).
-8. [Работа 5. Маскировка и дополнительная трубка](chapters/07-cloaking.md).
-9. [Работа 6. Плоская STG-линза](chapters/08-stg.md).
-10. [Измерения и протокол](chapters/09-measurements.md).
-11. [Небольшой проект](chapters/10-project.md).
-12. [Руководителю](chapters/11-mentor.md).
-13. [Словарь](chapters/12-glossary.md).
-14. [Библиография](references.md).
+6. [Работа 3. Поглощение](chapters/05-absorption.md).
+7. [Работа 4. Маскировка и дополнительная трубка](chapters/06-cloaking.md).
+8. [Работа 5. Плоская STG-линза](chapters/07-stg.md).
+9. [Измерения и протокол](chapters/08-measurements.md).
+10. [Небольшой проект](chapters/09-project.md).
+11. [Руководителю](chapters/10-mentor.md).
+12. [Словарь](chapters/11-glossary.md).
+13. [Библиография](references.md).
 
 Готовые файлы после сборки:
 [PDF](../../output/pdf/metamaterials-practicum.pdf),

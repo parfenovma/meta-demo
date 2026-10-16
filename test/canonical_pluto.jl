@@ -4,9 +4,9 @@ session=Pluto.ServerSession(options=Pluto.Configuration.from_flat_kwargs(
     disable_writing_notebook_files=true,launch_browser=false))
 notebook=Pluto.SessionActions.open(session,joinpath(@__DIR__,"..","notebooks","canonical_experiments.jl");run_async=false)
 try
-    @testset "Six canonical cards in real Pluto" begin
+    @testset "Five canonical cards in real Pluto" begin
         @test all(!c.errored for c in notebook.cells)
-        for id in ("mass","bulk","prism","absorber","cloak","focus")
+        for id in ("mass","bulk","absorber","cloak","focus")
             notebook.bonds[:canonical_lesson]=Dict("value"=>id)
             Pluto.set_bond_values_reactive(;session,notebook,bound_sym_names=[:canonical_lesson],run_async=false)
             @test all(!c.errored for c in notebook.cells)

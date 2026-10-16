@@ -3,7 +3,7 @@ include(joinpath(@__DIR__,"..","src","CanonicalData.jl"))
 using .CanonicalData
 
 @testset "Displayed response is the response of the prepared model" begin
-    for id in ("mass","bulk","prism","absorber")
+    for id in ("mass","bulk","absorber")
         d=CanonicalData.read_bundle(id)
         x=d["plot"]["x"]
         @test all(s->first(x)<=s["frequency"]<=last(x),d["sets"])

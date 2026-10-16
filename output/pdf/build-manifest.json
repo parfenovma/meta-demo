@@ -1,30 +1,28 @@
 {
   "sources": {
-    "chapters/00-orientation.md": "2d68fb19ef1c8ab7b5e955d2fc42748ae77a648ab0fed7c1cefe3586c1eacd19",
-    "chapters/01-workbench.md": "51900635eff0fcbf84114f81528e61112dab330db31c9b41290b166c78475efa",
+    "chapters/00-orientation.md": "af061b136ef20ed4aac5550e030148dc2c18a146ef31674bd5402fae982ced91",
+    "chapters/01-workbench.md": "e9df220db298b6c6163b5316a1560fed56893adc3633dbc45c3bbaf1af0056ab",
     "chapters/02-waves.md": "88adf5657097b0af87464c6a4dc45997efcc2cafcdc91b15f2842095a9627ba1",
     "chapters/03-mass.md": "0aaaacacff7132f5427ec8d09ab4981fd15f3c3189eb92e72d88b91da7101887",
     "chapters/04-bulk.md": "d404cf969e576bf117c8a212ef1e8f839572a574c2a3519d34171b8ee0430258",
-    "chapters/05-refraction.md": "aefcf03cb4391b5e976dbd759ed78827fa9dda54d1ee06a1550ec0a95e733e37",
-    "chapters/06-absorption.md": "8d2b7aaabbd538d8db9779089d15691329dcd66d91ba6176ffe64fe8c8af7146",
-    "chapters/07-cloaking.md": "4d88f81ae24093cd07261201bef00f84108047313299eea1c06969babc659849",
-    "chapters/08-stg.md": "ab740c6dea96ec4ae9ce3d4772be2d21e00fc58b5d690d252e07fc25de1736b8",
-    "chapters/09-measurements.md": "9e8a7a4e87c6f5be4c78886f929f3c0baf6f98d85f6e4b928c7fe1b979d1c96e",
-    "chapters/10-project.md": "a06fa49f51306ced30f8a0b9e7914b5b3a0bcfaeb05a845974cc1a5c9c4a1ea0",
-    "chapters/11-mentor.md": "bd7062938fa52b9ca9040804a28a4c63e65e4ec6d650fce4f43df91d0be3df69",
-    "chapters/12-glossary.md": "1587c6fd76199d414424f719a8837111f463b20a2c7b13b0d8a356176c23ce0f",
-    "references.md": "a9bb08ea32b19e53497af5cdce17f7f87c345b8e162f32065e1e0194014dfa81"
+    "chapters/05-absorption.md": "26c3147d082118266cea1fa7142a8b595810ac3e9f325a36bc8a4bd75d78e7ca",
+    "chapters/06-cloaking.md": "771d7e68d295c38b167d3746a8d40201140bc63ddf4fb1eec6c9cd5c66de7eaf",
+    "chapters/07-stg.md": "e5033c2d86fd60cc82b2fc7b008553d1688e2b0149d04c20211853d7319f3cfe",
+    "chapters/08-measurements.md": "bec5eac4dea419cac84f398df79710b16d2c8762e8c6c79be13385afe96f1d55",
+    "chapters/09-project.md": "9cacb1075a882403fa74c3d0771c2f1201a78438ac6af92cb5e7542dd2e36842",
+    "chapters/10-mentor.md": "9e54503249e65c663c27ff7953e2e7f9ad31a470337ca0b5b6da43349a2f02ac",
+    "chapters/11-glossary.md": "f05ff4cdc5514d2017154cee12baa48178f379eec9fa519a1ea8931f8bd42981",
+    "references.md": "d360a59f14899bfc1f86efb1ececb06bd492530879e7606a9b62aea50d4ed926"
   },
   "figures": {
-    "05-cloak.png": "50037585ad5f994d1618725101a06c9b5bc1bc9d913ea27da1275c86ddc1193b",
-    "03-refraction.png": "2fa4cc64c9477850c069769ece79b59301ceeb379805e1389951d67923cf4e00",
-    "06-stg.png": "34acee4b45cadec02ecc20ed0d2ab69307f4c68178da5a810667aad52fa13b58",
-    "04-absorption.png": "ea5485a2edbdfa6ada978f27728f3f51018899e7a1731c057d825feaf2fa4d8e",
+    "03-absorption.png": "ea5485a2edbdfa6ada978f27728f3f51018899e7a1731c057d825feaf2fa4d8e",
     "02-bulk.png": "550e084766c34f8cc6669a601f8383ee83be175639133e3caca8ae8e121f558b",
-    "01-mass.png": "997da2049ed88530749814f7b9d78d50c3ee86540a07499b1b7a3ed87720e15b"
+    "01-mass.png": "997da2049ed88530749814f7b9d78d50c3ee86540a07499b1b7a3ed87720e15b",
+    "04-cloak.png": "50037585ad5f994d1618725101a06c9b5bc1bc9d913ea27da1275c86ddc1193b",
+    "05-stg.png": "34acee4b45cadec02ecc20ed0d2ab69307f4c68178da5a810667aad52fa13b58"
   },
   "formatting": {
-    "book.json": "d83cc9a441359977cdc93e69a105082b9b68ac87c6f7c97017d269951b10d099",
+    "book.json": "3fa2315f5e42997cadd83bd19905b56a83911d7a94feadd3995a3faa4034c2f1",
     "print.css": "2c2a98df4979e29471b7e82a8a546c8a825ec4fb08ce3b7c00a3d19042e83c2e",
     "header.tex": "c3ec43ff37baf59e21a27810f53511ce82fa88583575efb4b5df5a6f038426c6",
     "pagebreaks.lua": "1fcdf19e252ec04f78bbf8e6ec4e26efc28a5da6c32b4f79e9a29562f362fda6"

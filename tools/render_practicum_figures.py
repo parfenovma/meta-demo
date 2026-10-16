@@ -234,7 +234,7 @@ def make_ground(data):
                 line(c, [-.168, 0, .168], [0, .112, 0], X, Y, '#e4bb66')
         colorbar(c, (190, 54, 450, 12), limit)
         label(c, 415, 15, 'Давление p, Па; t ≈ 2,3 мс. Цвет нелинейный, деления численные.', 10, align='center')
-    output('05-cloak', 840, 350, render)
+    output('04-cloak', 840, 350, render)
 
 
 def accumulate(case, history):
@@ -282,12 +282,12 @@ def make_stg(data):
         c.line(X(l),yy,X(r),yy)
         for xx in [X(l),X(r)]: c.line(xx,yy-4,xx,yy+4)
         label(c, (X(l)+X(r))/2, yy+7, f'{r-l:.1f} мм', 9, '#956e20', align='center')
-    output('06-stg', 760, 560, render)
+    output('05-stg', 760, 560, render)
 
 
 def main():
     setup()
-    data = {name: load(name) for name in ['mass','bulk','prism','absorber','cloak','focus']}
+    data = {name: load(name) for name in ['mass','bulk','absorber','cloak','focus']}
     def curves(name, transform=lambda y:y):
         p = data[name]['plot']
         return [dict(s, x=s.get('x',p.get('x')), y=[transform(v) for v in s['y']]) for s in p['series']]
@@ -297,20 +297,14 @@ def main():
     frequency('02-bulk', 'Модуль канала относительно воды', curves('bulk'),
               'Re K / Kводы, без единиц; за пределами ±4 кривая не показана',
               (-4.4,4.4), data['bulk']['sets'][1]['frequency'], .001, clip=4, yticks=[-4,-2,0,1,2,4])
-    prism = curves('prism')[0]
-    prism['name'] = 'Метасреда: ρ/ρ₀ и β/β₀'
-    frequency('03-refraction', 'Заданные параметры обычной призмы и метасреды',
-              [dict(name='Обычная призма',x=prism['x'],y=[1.5]*len(prism['x'])),prism],
-              'Re ρ/ρ₀ = Re β/β₀, без единиц', (-4,2), 2000, .001,
-              yticks=[-4,-2,0,1,2], height=300)
-    frequency('04-absorption', 'Потери надо согласовать, а не просто увеличить',
+    frequency('03-absorption', 'Потери надо согласовать, а не просто увеличить',
               curves('absorber', lambda v:100*v), 'Поглощённая мощность, %',
               (0,105), 848, yticks=[0,25,50,75,100])
     make_ground(data['cloak'])
     make_stg(data['focus'])
     provenance = {name: {'source_digest': d['source_digest'], 'bundle_sha256': hashlib.sha256((ROOT/'data'/'canonical'/(name+'.json.gz')).read_bytes()).hexdigest()} for name,d in data.items()}
     (OUT/'provenance.json').write_text(json.dumps(provenance, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
-    print('Rendered six figures from shipped data; no physical solver invoked.')
+    print('Rendered five figures from shipped data; no physical solver invoked.')
 
 
 if __name__ == '__main__':

@@ -1,26 +1,22 @@
 {
   "mass": {
-    "source_digest": "9cdd96e08b1e50b660e33400993d89e3b77754936e9a6b3c48b3f951a6302275",
-    "bundle_sha256": "23e7c63a822d509bdc1ca646b19ae1c40f9abdd39e6dd8c4a268c93f5325a70d"
+    "source_digest": "0d9d31c2b0e071bb94666dbb5e50797ac26557f7a7bfb0c49d92aa0a834ef30c",
+    "bundle_sha256": "e7c307cf1eed19c2a9fe41e8f204b31185dba4ccf3e19a92f16cdfbc810d10f3"
   },
   "bulk": {
-    "source_digest": "9cdd96e08b1e50b660e33400993d89e3b77754936e9a6b3c48b3f951a6302275",
-    "bundle_sha256": "2fbd5118649244f3edbd809213279658e6dbcee1082e6ae7bf52b40644ca58fd"
-  },
-  "prism": {
-    "source_digest": "9cdd96e08b1e50b660e33400993d89e3b77754936e9a6b3c48b3f951a6302275",
-    "bundle_sha256": "59dba5ca1388753f4a153f2b642f78f1a81585cc07df6cec141e35393f798a4f"
+    "source_digest": "0d9d31c2b0e071bb94666dbb5e50797ac26557f7a7bfb0c49d92aa0a834ef30c",
+    "bundle_sha256": "816bed5770e1e65e56f1e41259bdb0a3c897ca1e8094d77f7da318054860fe0e"
   },
   "absorber": {
-    "source_digest": "9cdd96e08b1e50b660e33400993d89e3b77754936e9a6b3c48b3f951a6302275",
-    "bundle_sha256": "c3dd52074bd42aefc26fc56121cdbf4210a67c6352fd9faee89437babdcf7b34"
+    "source_digest": "0d9d31c2b0e071bb94666dbb5e50797ac26557f7a7bfb0c49d92aa0a834ef30c",
+    "bundle_sha256": "f4a93a41458398686cc2b6ac7e7ba71edc37bc0c5070c50ade20576968e51c0e"
   },
   "cloak": {
-    "source_digest": "9cdd96e08b1e50b660e33400993d89e3b77754936e9a6b3c48b3f951a6302275",
-    "bundle_sha256": "a909f9e2ebf99d65c2258283bdc0a53b970c16cd9d53249a48066279d6d3b6ee"
+    "source_digest": "0d9d31c2b0e071bb94666dbb5e50797ac26557f7a7bfb0c49d92aa0a834ef30c",
+    "bundle_sha256": "776e82d062b16bca2076f354b42d89507b928a41083f06845ee885a15db0c2a8"
   },
   "focus": {
-    "source_digest": "9cdd96e08b1e50b660e33400993d89e3b77754936e9a6b3c48b3f951a6302275",
-    "bundle_sha256": "37cd0d44a4fae006e14b08631a71febebbbbb7df41ba921f78de8b4cf4b97e36"
+    "source_digest": "0d9d31c2b0e071bb94666dbb5e50797ac26557f7a7bfb0c49d92aa0a834ef30c",
+    "bundle_sha256": "16cd6dcdbedb105013ed7ca05977355f116d6a4978cd10e2881922c09c3bec00"
   }
 }

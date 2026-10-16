@@ -44,7 +44,7 @@ function duringLoading(v){
   assert.equal(mass.run('cnReady'),true);assert.equal(mass.run('cnSet'),1);assert.equal(mass.e('.cn-error').textContent,'');
   assert(mass.e('.cn-frequency').children[1].textContent.includes('Отрицательная'));
   console.log('PASS: loading guards and out-of-order frequency completion retain newest selection');
-  for(const id of ['mass','bulk','prism','absorber','cloak','focus']){
+  for(const id of ['mass','bulk','absorber','cloak','focus']){
     const v=id==='mass'?mass:viewer(id),sets=v.run('cnData.sets.length');
     for(let s=0;s<sets;s++){
       await v.run(`cnChooseSet(${s})`);assert.equal(v.e('.cn-error').textContent,'');assert.equal(v.run('cnReady'),true);
@@ -78,7 +78,7 @@ function duringLoading(v){
         if(lesson.chart){assert.equal(v.e('.cn-plot-title').textContent,lesson.chart.title);assert.equal(v.e('.cn-explanation').textContent,lesson.chart.explanation);if(v.run('!!cnData.plot'))assert(v.e('.cn-reading').textContent.includes('На '));}
       }
       const right=JSON.parse(v.run('JSON.stringify(cnLastPlots[".cn-spectrum"])'));
-      if(['mass','bulk','prism','absorber'].includes(id)){
+      if(['mass','bulk','absorber'].includes(id)){
         const frequencies=right[1].flatMap(curve=>curve.x),marker=right[4];
         assert(marker>=Math.min(...frequencies)&&marker<=Math.max(...frequencies),`${id}: current-frequency line must be on the visible chart`);
         assert(right[1].some(curve=>Number.isFinite(curve.markerValue)),`${id}: mark current values with dots`);

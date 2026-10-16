@@ -1,7 +1,7 @@
 # Источники практикума: библиография и границы заимствования
 
 Проверено 15 октября 2026 года. Это редакторская записка: она связывает
-шесть готовых карточек с первичными работами, а не объявляет наши модели
+пять готовых карточек с первичными работами, а не объявляет наши модели
 репликациями опубликованных экспериментов. Пользовательскую книгу
 «Acoustic Metamaterials» в этой записке не разбирали: её страницы проверяются
 отдельно при подготовке методички.
@@ -45,28 +45,7 @@ negative modulus. *Nature Materials* **5**, 452–456 (2006).
 ветви. Модуль выводится из уравнений сети; один провал передачи не служит
 независимым измерением его знака. См. [CanonicalData.jl](../src/CanonicalData.jl).
 
-## 3. Преломление — `prism`
-
-**Библиография.** Yangbo Xie, Bogdan-Ioan Popa, Lucian Zigoneanu,
-Steven A. Cummer. Measurement of a Broadband Negative Index with
-Space-Coiling Acoustic Metamaterials. *Physical Review Letters* **110**,
-175501 (2013).
-[DOI: 10.1103/PhysRevLett.110.175501](https://doi.org/10.1103/PhysRevLett.110.175501).
-
-**Что подтверждено.** Отрицательный индекс лабиринтных ячеек проверен
-портовыми измерениями и призмой. Название опубликованной статьи содержит
-*Measurement*, не *Measurements*. Источники:
-[издатель](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.110.175501),
-[авторский препринт](https://arxiv.org/pdf/1212.0237).
-
-**Наша карточка по коду.** `prepare_prism()` решает 2D-акустику с заданными
-причинными Drude-переменными. Лабиринты Xie здесь не разрешены. Отрицательные
-параметры эффективной среды — вход модели, не результат извлечения из нашей
-микроструктуры. Правильная формулировка работы: наблюдение преломления
-**заданной дисперсионной среды** и сравнение с обычной призмой.
-См. [CanonicalData.jl](../src/CanonicalData.jl).
-
-## 4. Поглощение — `absorber`
+## 3. Поглощение — `absorber`
 
 **Библиография.** Guancong Ma, Min Yang, Songwen Xiao, Zhiyu Yang,
 Ping Sheng. Acoustic metasurface with hybrid resonances.
@@ -87,7 +66,7 @@ Ping Sheng. Acoustic metasurface with hybrid resonances.
 График поглощения относится к установившейся синусоиде, не ко всей энергии
 короткого импульса. См. [CanonicalData.jl](../src/CanonicalData.jl).
 
-## 5. Плащ над выступом — `cloak`, набор `ground`
+## 4. Плащ над выступом — `cloak`, набор `ground`
 
 **Библиография.** Bogdan-Ioan Popa, Lucian Zigoneanu, Steven A. Cummer.
 Experimental Acoustic Ground Cloak in Air. *Physical Review Letters*
@@ -106,7 +85,7 @@ Experimental Acoustic Ground Cloak in Air. *Physical Review Letters*
 восстановить отражённый фронт, **не поглотить звук**. Мера несовпадения
 полей не является энергией. См. [CanonicalData.jl](../src/CanonicalData.jl).
 
-## 6. Плоская упругая линза — `focus`
+## 5. Плоская упругая линза — `focus`
 
 **Библиография.** Xiaoshi Su, Zhaocheng Lu, Andrew N. Norris.
 Elastic metasurfaces for splitting SV- and P-waves in elastic solids.

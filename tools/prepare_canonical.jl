@@ -1,7 +1,7 @@
 # Offline developer command. Opening the notebook never includes this file.
 using MetaNDT
 include(joinpath(@__DIR__,"..","src","CanonicalData.jl"))
-requested=isempty(ARGS) ? ["mass","bulk","absorber","cloak","prism","focus"] : ARGS
+requested=isempty(ARGS) ? ["mass","bulk","absorber","cloak","focus"] : ARGS
 for id in requested
     if id=="focus"
         include(joinpath(@__DIR__,"prepare_focus.jl"))

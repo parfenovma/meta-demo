@@ -12,7 +12,7 @@ function Base.show(io::IO,::MIME"text/html",::CanonicalPicker)
     <div id="canonical-picker" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;font:15px system-ui">
     <script>
     const root=document.getElementById('canonical-picker');
-    const lessons=[['mass','01 · Отрицательная масса'],['bulk','02 · Отрицательный модуль'],['prism','03 · Преломление'],['absorber','04 · Поглощение'],['cloak','05 · Акустический плащ'],['focus','06 · Фокусировка STG']];
+    const lessons=[['mass','01 · Отрицательная масса'],['bulk','02 · Отрицательный модуль'],['absorber','03 · Поглощение'],['cloak','04 · Акустический плащ'],['focus','05 · Фокусировка STG']];
     root.value='mass';
     lessons.forEach(([id,title])=>{const b=document.createElement('button');b.type='button';b.textContent=title;b.dataset.lesson=id;b.style.cssText='font:inherit;text-align:left;padding:14px;border-radius:10px;border:1px solid #5b7887;cursor:pointer;background:transparent;color:inherit';
       b.onclick=()=>{root.value=id;root.querySelectorAll('button').forEach(q=>q.style.background=q.dataset.lesson===id?'#278d8d55':'transparent');root.dispatchEvent(new CustomEvent('input',{bubbles:true}))};root.append(b)});
