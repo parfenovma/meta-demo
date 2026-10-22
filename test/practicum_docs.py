@@ -7,6 +7,7 @@ import re
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('build_practicum', ROOT/'tools'/'build_practicum.py')
@@ -33,17 +34,39 @@ class HTML(HTMLParser):
 
 
 class Practicum(unittest.TestCase):
+    def test_all_markdown_local_links(self):
+        paths = [*ROOT.glob('*.md'), *ROOT.glob('docs/**/*.md'),
+                 ROOT/'output'/'pdf'/'metamaterials-practicum.md']
+        for path in paths:
+            text = path.read_text(encoding='utf-8')
+            for match in book.LINK.finditer(text):
+                target = match.group(2)
+                if re.match(r'^[a-zA-Z][a-zA-Z0-9+.-]*:', target):
+                    continue
+                name, _, fragment = target.partition('#')
+                destination = (path.parent / unquote(name)).resolve() if name else path
+                self.assertTrue(destination.is_file(), f'{path}: missing {target}')
+                if fragment and destination.suffix == '.md':
+                    # The handbook uses explicit stable anchors for cross-links.
+                    body = destination.read_text(encoding='utf-8')
+                    self.assertIn('{#' + fragment + '}', body,
+                                  f'{path}: unresolved {target}')
+
     def test_ordered_complete_sources(self):
         config, merged, figures, paths = book.assemble()
         self.assertEqual(len(paths), 13)
-        self.assertGreater(len(merged.split()), 10000)
+        self.assertGreater(len(merged.split()), 4000)
+        self.assertLess(len(merged.split()), 6500)
         self.assertEqual(len(figures), 5)
         self.assertEqual(len(re.findall(r'^# ', merged, re.M)), 13)
         for path in paths[3:8]:
             text = path.read_text(encoding='utf-8')
-            self.assertGreater(len(text.split()), 650)
-            self.assertGreater(len(re.findall(r'^\d+\. ', text, re.M)), 12)
+            self.assertGreaterEqual(len(text.split()), 350)
+            self.assertLessEqual(len(text.split()), 650)
+            self.assertGreaterEqual(len(re.findall(r'^\d+\. ', text, re.M)), 8)
             self.assertIn('## Цель и результат', text)
+            self.assertIn('## Порядок работы', text)
+            self.assertIn('## Вопросы и отчёт', text)
             self.assertIn('references.md#ref-', text)
             self.assertIn('![' ,text)
         self.assertNotRegex(merged, r'\]\([^)]*\.md(?:#|\))')

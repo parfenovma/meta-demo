@@ -1,53 +1,46 @@
-# Point sensor validation — 2026-10-15
+# Harmonic point sensor: validation record
 
-Scope: postprocessing and UI only. No acoustic/elastic weak form or material
-parameter changed. The existing numerical controls remain in place.
+Local run: 15 October 2026, macOS ARM64, Julia 1.10.12,
+`OPENBLAS_NUM_THREADS=1`.
+This records the harmonic stage, not the later transient modes.
+No weak form or material parameter changed.
 
-## Automated checks run locally
-
-Julia 1.10.12, macOS ARM64, `OPENBLAS_NUM_THREADS=1`:
+## Automated checks
 
 | Suite | Passed |
 |---|---:|
 | Backend-free P1 interpolation and harmonic trace | 25 |
-| Workbench adapters, shelf and retained-solution sensor | 104 |
-| Actual Pluto bond/command lifecycle, including probes | 31 |
+| Workbench adapters, shelf and retained sensor | 104 |
+| Real Pluto command lifecycle | 31 |
 | Existing demo contract | 31 |
-| Existing coated FEM / independent analytic reference | 116 |
-| **Total Julia assertions** | **307** |
+| Coated FEM and independent analytic reference | 116 |
+| Total Julia assertions | 307 |
 
-JS syntax and `node test/workbench_assets.cjs` also pass, including physical
-coordinate transforms, axis-strip rejection, phase values and visible playback.
-No Windows/Linux execution is claimed for this local run; CI includes the new
-point-observation test.
+JS syntax and `node test/workbench_assets.cjs` passed.
+Coverage includes coordinate transforms, axis rejection, phase readings
+and visible playback. Windows and Linux were not run locally in this stage.
 
-Important numerical gates: affine complex-vector P1 field exactly interpolated;
-gap between disconnected triangles rejected; `exp(-iωt)` quadrature checked;
-empty-water plane wave matches analytic time samples. Water and solid readings
-match their actual retained solutions after calculation caches are cleared.
-Sensor commands do not call the injected solver. Pa/nm conversion, invalid/stale
-commands, paired unavailable media, pin immutability and restore are covered.
+Numerical checks covered affine complex P1 interpolation, gaps between
+disconnected triangles, `exp(-iωt)` quadrature and the analytic empty-water wave.
+Probes matched retained solutions after calculation-cache eviction.
+Sensor commands did not call the injected solver.
+Pa/nm conversion, invalid or stale commands, unavailable media,
+pin immutability and restore were tested.
 
-## Real browser checks
+## Actual browser pass
 
-The actual Pluto UI was used, not a browser emulation:
+- A click inside the tube was rejected; a water click produced paired traces
+  without changing the run ID.
+- Starting from static scattered amplitude selected full-pressure phase.
+  The slider, cursor and instantaneous readings moved together.
+- D1 at (12, 0) mm supported pause, scattered-channel selection and CSV export.
+  An unsaved note survived the update; the CSV had case, quantity,
+  SI coordinates, Hz, seconds and Pa values.
+- Pinning and reconnecting to the same Julia session preserved D1.
+- STG at (40, 1) mm returned nm signals for the lens and straight control.
+  Playback switched static energy to phase; pause and pin kept both runs.
 
-- Click inside the tube: placement rejected, no false zero measurement.
-- Click in water: sensor and paired traces appear, same run ID retained.
-- Start animation while in static scattered-amplitude mode: full-pressure phase
-  activates automatically; phase slider and instantaneous probe values change.
-- Pause; switch to scattered channel; place D1 at `(12, 0)` mm using the form.
-  An unsaved note survives the sensor update.
-- Export a real CSV and inspect its header and first rows: case, quantity,
-  SI coordinates, Hz, seconds and Pa values are present.
-- Pin, reconnect to the same Julia session and retain the pinned sensor.
-- Calculate STG, place D1 at `(40, 1)` mm and read actual nm signals for the
-  lens and straight control. Playback from static energy mode automatically
-  switches to phase; instantaneous readings move while the run ID stays fixed.
-  Pause and pin the solid run alongside the water run. Browser console has no
-  errors. The old Julia session and its two original pins remain available.
-
-Two independent review axes completed: Standards 0 open, Spec 0 open.
-
-These tests do not turn the harmonic trace into a pulse simulation, prove new
-metamaterial performance or model a real sensor's aperture, noise or calibration.
+No browser-console errors were reported. The stage's independent Standards
+and Spec reviews recorded zero open findings.
+These checks did not create a pulse simulation or test sensor noise,
+aperture, calibration or new metamaterial performance.

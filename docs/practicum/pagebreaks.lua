@@ -7,10 +7,14 @@ function Header(header)
   if header.level == 1 then
     bibliography = header.identifier == 'bibliography'
   end
-  if header.level == 1 and (header.identifier:match('^lab%-') or bibliography) then
+  if header.level == 1 and (header.identifier:match('^lab%-') or
+      header.identifier == 'measurements' or bibliography) then
     return {pandoc.RawBlock('latex', '\\clearpage'), header}
   end
   if bibliography and header.level == 2 then
     return {pandoc.RawBlock('latex', '\\Needspace{8\\baselineskip}'), header}
+  end
+  if header.level == 1 then
+    return {pandoc.RawBlock('latex', '\\Needspace{10\\baselineskip}'), header}
   end
 end

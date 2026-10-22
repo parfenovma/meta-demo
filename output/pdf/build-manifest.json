@@ -1,31 +1,31 @@
 {
   "sources": {
-    "chapters/00-orientation.md": "af061b136ef20ed4aac5550e030148dc2c18a146ef31674bd5402fae982ced91",
-    "chapters/01-workbench.md": "e9df220db298b6c6163b5316a1560fed56893adc3633dbc45c3bbaf1af0056ab",
-    "chapters/02-waves.md": "88adf5657097b0af87464c6a4dc45997efcc2cafcdc91b15f2842095a9627ba1",
-    "chapters/03-mass.md": "0aaaacacff7132f5427ec8d09ab4981fd15f3c3189eb92e72d88b91da7101887",
-    "chapters/04-bulk.md": "d404cf969e576bf117c8a212ef1e8f839572a574c2a3519d34171b8ee0430258",
-    "chapters/05-absorption.md": "26c3147d082118266cea1fa7142a8b595810ac3e9f325a36bc8a4bd75d78e7ca",
-    "chapters/06-cloaking.md": "771d7e68d295c38b167d3746a8d40201140bc63ddf4fb1eec6c9cd5c66de7eaf",
-    "chapters/07-stg.md": "e5033c2d86fd60cc82b2fc7b008553d1688e2b0149d04c20211853d7319f3cfe",
-    "chapters/08-measurements.md": "bec5eac4dea419cac84f398df79710b16d2c8762e8c6c79be13385afe96f1d55",
-    "chapters/09-project.md": "9cacb1075a882403fa74c3d0771c2f1201a78438ac6af92cb5e7542dd2e36842",
-    "chapters/10-mentor.md": "9e54503249e65c663c27ff7953e2e7f9ad31a470337ca0b5b6da43349a2f02ac",
-    "chapters/11-glossary.md": "f05ff4cdc5514d2017154cee12baa48178f379eec9fa519a1ea8931f8bd42981",
-    "references.md": "d360a59f14899bfc1f86efb1ececb06bd492530879e7606a9b62aea50d4ed926"
+    "chapters/00-orientation.md": "bcb855f1abc8d9b6e78685f5072972b1a21b97fc7bfbb740d658c0b894c42341",
+    "chapters/01-workbench.md": "6e9ec1613fdb017c03f3d67bf401f0062f310be9641833af5dd359c8e846ac14",
+    "chapters/02-waves.md": "da21e3cb6f392183247cffd556c9fdee3a1a07f8cc70ddbc739d1c93d8d47256",
+    "chapters/03-mass.md": "c99ecc56889685346027afd410762ce14023ca78b0569cfb312577d502e7a6e7",
+    "chapters/04-bulk.md": "d93c1ff1bad416112518bacc03d0b806c68057b88ba3b8c7f456f82c9e14172e",
+    "chapters/05-absorption.md": "e51c5b210ebb65a4e78595f4b476014b7e25e8c4df3559310c3d70bca9b737fd",
+    "chapters/06-cloaking.md": "050e14882b0ddfa9fc233fe5c00d5167650c07d8936475b10d99bb29b872f83b",
+    "chapters/07-stg.md": "8e244d7877ec5b7ced80fbfdb6d75ba0c4feb80775a52b4d2e83728c80067cf3",
+    "chapters/08-measurements.md": "17162986fa35566dd36ce8aa8d46f1bfd60691cac5c758fdbd07fb49330db348",
+    "chapters/09-project.md": "66ef172aebe0381a4211c146f02fca29d7992a4f0c3b5bfa9bf4b5c6d873d5c7",
+    "chapters/10-mentor.md": "a931c698bc404455be0bbb0f4ef1d6c88568a8fca9c2321c4972b016ea98cab3",
+    "chapters/11-glossary.md": "d7b7ae7feae17ff5ca085dd3119d94c89b004642ac1b027a8e038c3e26b50369",
+    "references.md": "e50ce9fcf4903277d0513b174dc5d22057d54159c9ae218cbd1173654580796e"
   },
   "figures": {
     "03-absorption.png": "ea5485a2edbdfa6ada978f27728f3f51018899e7a1731c057d825feaf2fa4d8e",
+    "05-stg.png": "34acee4b45cadec02ecc20ed0d2ab69307f4c68178da5a810667aad52fa13b58",
     "02-bulk.png": "550e084766c34f8cc6669a601f8383ee83be175639133e3caca8ae8e121f558b",
-    "01-mass.png": "997da2049ed88530749814f7b9d78d50c3ee86540a07499b1b7a3ed87720e15b",
     "04-cloak.png": "50037585ad5f994d1618725101a06c9b5bc1bc9d913ea27da1275c86ddc1193b",
-    "05-stg.png": "34acee4b45cadec02ecc20ed0d2ab69307f4c68178da5a810667aad52fa13b58"
+    "01-mass.png": "997da2049ed88530749814f7b9d78d50c3ee86540a07499b1b7a3ed87720e15b"
   },
   "formatting": {
-    "book.json": "3fa2315f5e42997cadd83bd19905b56a83911d7a94feadd3995a3faa4034c2f1",
+    "book.json": "1c48b7badb5f8f6d34046c2950026de2775c11dc5deaa41a3baa324cffe30a1c",
     "print.css": "2c2a98df4979e29471b7e82a8a546c8a825ec4fb08ce3b7c00a3d19042e83c2e",
-    "header.tex": "c3ec43ff37baf59e21a27810f53511ce82fa88583575efb4b5df5a6f038426c6",
-    "pagebreaks.lua": "1fcdf19e252ec04f78bbf8e6ec4e26efc28a5da6c32b4f79e9a29562f362fda6"
+    "header.tex": "8effb4ba60829ff1055096423e90e95c3ca35ae053662b3a5ff74473b4cd1c65",
+    "pagebreaks.lua": "0ea122655888f76409f5c8a25c8b2c540ffff678037e98675a29c8051d300acc"
   },
   "pandoc": "pandoc 3.9.0.2"
 }

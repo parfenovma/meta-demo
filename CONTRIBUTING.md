@@ -1,28 +1,32 @@
 # Contributing
 
-Small, reviewable changes are welcome.
+Keep changes small enough to review and reproduce.
 
-## Good first contributions
+## Useful contributions
 
-- improve a Russian explanation without changing the claim boundary;
-- add an English translation;
-- add a new plot built from existing public API results;
-- write a test for a corner case;
-- add a data adapter without coupling it to Pluto;
-- propose a two-defect resolution experiment before implementing it.
+Improve an explanation, add a translation or plot, cover an edge case,
+or add an adapter over the public library API. Propose the measurement
+and controls before implementing a new scientific claim.
 
-## Ground rules
+## Rules
 
-1. Keep `src/` independent of Pluto and visualization packages.
-2. Do not replace frozen FEM values with hand-tuned numbers.
-3. Use the same noise realization for a paired comparison unless the experiment
-   explicitly studies different noise processes.
-4. Do not call model probabilities measured POD.
-5. New scientific claims need data, a frozen metric and a test.
+- Put numerical models in `meta-ndt`; keep Pluto notebooks as clients.
+- Preserve calculated values. Do not tune frozen fields to make a plot convincing.
+- Use the same noise realization in paired comparisons unless different noise
+  processes are the subject of the experiment.
+- Label model probabilities as model results, not measured POD.
+- Support a new claim with data, a defined metric and a regression test.
+- Keep the five lab chapters within 2-3 PDF pages each. Preserve the control,
+  procedure, units and source links; remove repetition instead of shrinking type.
 
-Run before opening a pull request:
+From `meta-demo`, with the sibling library present:
 
-```bash
-julia --startup-file=no --project=demo -e 'using Pkg; Pkg.instantiate()'
-julia --startup-file=no --project=demo test/runtests.jl
+```sh
+julia +1.10 --startup-file=no --project=demo -e 'using Pkg; Pkg.instantiate()'
+julia +1.10 --startup-file=no --project=demo test/runtests.jl
+python3 tools/build_practicum.py --check
 ```
+
+For documentation changes, rebuild the handbook and run
+`test/practicum_docs.py`. PDF checks and authoring dependencies are listed
+in [the handbook guide](docs/practicum/README.md).

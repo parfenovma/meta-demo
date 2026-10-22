@@ -154,7 +154,25 @@ jobs:
   docs:
     name: Practicum sources and published artifacts
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: meta-demo
     steps:
       - uses: actions/checkout@v6
+        with:
+          path: meta-demo
+      - uses: actions/checkout@v6
+        with:
+          repository: parfenovma/meta-ndt
+          # Keep this aligned with the numerical test job's kernel revision.
+          ref: 6ae6c289d776c09e0fd5932c4e90083a9dffddd0
+          path: meta-ndt
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install PDF checker dependency
+        run: python3 -m pip install pypdf==6.10.0
       - run: python3 tools/build_practicum.py --check
       - run: python3 test/practicum_docs.py
+      - name: Verify published PDF page budget and links
+        run: python3 tools/check_practicum_pdf.py

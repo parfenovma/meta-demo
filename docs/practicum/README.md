@@ -1,77 +1,71 @@
-# Методичка: исходники и сборка
+# Методичка: чтение и сборка
 
-Практикум читается по главам в Markdown или одним собранным документом.
-Программировать для выполнения работ не нужно. Установка самого стенда
-описана в [главном README](../../README.md).
+[Установка стенда](../../README.md) нужна для опытов.
+Методичку можно читать отдельно: [PDF](../../output/pdf/metamaterials-practicum.pdf),
+[автономный HTML](../../output/pdf/metamaterials-practicum.html)
+или [единый Markdown](../../output/pdf/metamaterials-practicum.md).
+HTML содержит рисунки и формулы, внешний сервер ему не нужен.
 
-## Читать по порядку
+## Главы
 
 1. [О практикуме](chapters/00-orientation.md).
-2. [Как пользоваться стендом](chapters/01-workbench.md).
-3. [Волны, резонанс и эффективные свойства](chapters/02-waves.md).
+2. [Управление стендом](chapters/01-workbench.md).
+3. [Волны и эффективные свойства](chapters/02-waves.md).
 4. [Работа 1. Динамическая масса](chapters/03-mass.md).
 5. [Работа 2. Объёмный модуль](chapters/04-bulk.md).
 6. [Работа 3. Поглощение](chapters/05-absorption.md).
-7. [Работа 4. Маскировка и дополнительная трубка](chapters/06-cloaking.md).
+7. [Работа 4. Маскировка и трубка с оболочкой](chapters/06-cloaking.md).
 8. [Работа 5. Плоская STG-линза](chapters/07-stg.md).
-9. [Измерения и протокол](chapters/08-measurements.md).
-10. [Небольшой проект](chapters/09-project.md).
+9. [Протокол](chapters/08-measurements.md).
+10. [Проект](chapters/09-project.md).
 11. [Руководителю](chapters/10-mentor.md).
 12. [Словарь](chapters/11-glossary.md).
 13. [Библиография](references.md).
 
-Готовые файлы после сборки:
-[PDF](../../output/pdf/metamaterials-practicum.pdf),
-[HTML](../../output/pdf/metamaterials-practicum.html),
-[единый Markdown](../../output/pdf/metamaterials-practicum.md).
-HTML содержит рисунки и MathML внутри файла; отдельный сервер и доступ
-к внешнему сервису формул для чтения не нужны.
+Каждая работа рассчитана на 2-3 страницы PDF с рисунком.
+Общие пояснения вынесены во введение и словарь.
 
-## Собрать заново
+## Пересборка для автора
 
-Это инструменты **для автора документации**, не дополнительные
-зависимости ученика. Нужны Python 3, Pandoc и для PDF — XeLaTeX
-с пакетами `fontspec`, `unicode-math`, `polyglossia`, `titlesec`,
-`microtype`, `xurl`, `float`, `needspace` и шрифтами DejaVu / Latin Modern Math.
-Подойдут подходящие установки TeX Live или MacTeX; на Windows
-также можно подготовить TeX-окружение отдельно. Автоматическая установка
-TeX из нашего скрипта не выполняется.
+Нужны Python 3 и Pandoc; для PDF - XeLaTeX, шрифты DejaVu / Latin Modern Math
+и пакеты `fontspec`, `unicode-math`, `polyglossia`, `titlesec`, `microtype`,
+`xurl`, `float`, `needspace`.
+Ученику эти инструменты не требуются.
 
 Из корня `meta-demo`:
 
 ```sh
 python3 tools/build_practicum.py --check
 python3 tools/build_practicum.py
+python3 test/practicum_docs.py
 ```
 
-В Windows с Python Launcher вместо `python3` можно использовать `py -3`.
-Если LaTeX пока не установлен, соберите только HTML:
+В Windows вместо `python3` можно использовать `py -3`.
+Без LaTeX доступна сборка `--format html`.
+
+Порядок глав задан в `book.json`. Сборщик проверяет якоря и ссылки,
+создаёт один документ и передаёт его Pandoc. Обложка и оглавление
+не дублируются. Хеши исходников и оформления записываются в
+`output/pdf/build-manifest.json`.
+
+Каждая работа начинается с новой страницы; приложения отделены от STG.
+Переносами управляет `pagebreaks.lua`.
+Для проверки пагинации и ссылок готового PDF:
 
 ```sh
-python3 tools/build_practicum.py --format html
+python3 tools/check_practicum_pdf.py
 ```
 
-Порядок глав записан в `book.json`, не определяется случайной сортировкой
-файлов. Каждая глава имеет один верхний заголовок и уникальный якорь.
-Скрипт проверяет ссылки, переводит ссылки между MD в ссылки внутри книги,
-переносит рисунки и один раз передаёт полный документ Pandoc.
-Он не склеивает готовые PDF, не дублирует обложки и оглавления.
-В `build-manifest.json` сохраняются хеши исходников и версия Pandoc.
-В PDF каждая лабораторная работа начинается с новой страницы;
-вводные главы и приложения идут непрерывно. Переносами управляет
-`pagebreaks.lua`, а не пустые строки в исходниках.
+Этой проверке нужен пакет pypdf. После неё просмотрите отрисованные
+страницы: автоматический тест не обнаруживает все дефекты вёрстки.
 
 ## Рисунки и источники
 
-Рисунки в `figures/` созданы из поставленных пакетов `data/canonical/`.
-Для их регенерации нужен отдельный инструмент
-`tools/render_practicum_figures.py`, а также Python-пакеты ReportLab,
-Pillow и программа `pdftoppm`. Обычная сборка использует готовые PNG
-и не запускает физические решатели.
+Обычная сборка использует готовые PNG из `figures/` и не решает физику.
+Для регенерации есть `tools/render_practicum_figures.py`;
+ему нужны ReportLab, Pillow и `pdftoppm`.
 
-Книга и изображения издателей не копируются. Статьи перечислены в
-библиографии; номера страниц книги относятся к предоставленному изданию.
-Проверка источников записана отдельно в `docs/PRACTICUM_SOURCE_AUDIT.md`
-и `docs/PRACTICUM_BOOK_NOTES.md`.
-Итоги сборки и её ограничения — в
-[отчёте о проверке](../PRACTICUM_VALIDATION.md).
+[Проверка статей](../PRACTICUM_SOURCE_AUDIT.md),
+[заметки по книге](../PRACTICUM_BOOK_NOTES.md)
+и [проверка сборки](../PRACTICUM_VALIDATION.md)
+хранят происхождение объяснений и ограничения проверки.
